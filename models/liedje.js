@@ -1,43 +1,18 @@
 var mongoose = require('mongoose');
-var moment = require('moment');
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+//Define a schema
 var Schema = mongoose.Schema;
 
-var LiedjeSchema = new Schema(
-        {
-            artiestenNaam: {type: String, required: true, max: 100},
-            titel: {type: String, required: true, max: 100},
-            aantStemmen: {type: number, required: true}
-        }
-    );
+var Liedje = new Schema({
+    titel          : {type: String, required: true},
+    artiestNaam    : {type: String, required: true},
+    aantStemmen    : {type: Number, default: 1}
+});
+Liedje
+.virtual('url')
+.get(function () {
+  return '/homepage/liedje/' + this._id;
+});
 
-// Virtual for artietenNaam
-LiedjeSchema
-    .virtual('artiestenNaam')
-    .get(function () {
-        return this.artiesstenNaam;
-    });
-
-// Virtual for titel
-LiedjeSchema
-    .virtual('titel')
-    .get(function () {
-        return this.titel;
-    });
-
-// Virtual for aantStemmen
-LiedjeSchema
-    .virtual('aantStemmen')
-    .get(function () {
-        return this.aantStemmen;
-    });
-
-
-// Virtual for author's URL
-LiedjeSchema
-    .virtual('url')
-    .get(function () {
-        return '/liedje/' + this._id;
-    });
-
-//Export model
-module.exports = mongoose.model('Liedje', LiedjeSchema);
+module.exports = mongoose.model('Liedje', Liedje );

@@ -1,16 +1,14 @@
 extends layout
-
 block content
-    h1(style=headStyle)="LIEDJESSTEMPLAATS"
-    
-    div.label(style=bodyStyle) Titel: 
-        input(name = "inpTitel")
-        
-    div.label(style=bodyStyle) Artiest: 
-        input(name= "inpArtiest")     
-    button stem
-    
-    h1(style=headStyle) top 10
-    ul
-       il liedje 1
-       il liedje 2
+    h2(style=headStyle)="LIEDJESSTEMPLAATS"
+    form(method='POST', action='')
+        div.form-group
+            .label(style=bodyStyle, for='titel') Titel: 
+                input#titel.form-control(name = "inpTitel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
+            .label(for="artiestNaam", style=bodyStyle) Artiest: 
+                input#artiestNaam.form-controle(name="inpArtiest", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam))  
+                button.btn.btn-primary(type='submit') Stem
+    h2(name="top 10",style=headStyle) top 10
+    ol
+        each liedje in liedje_list
+            li #{liedje.titel} door #{liedje.artiestNaam} stemmen: #{liedje.aantStemmen}

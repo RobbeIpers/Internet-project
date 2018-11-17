@@ -4,8 +4,32 @@ html
     title= title
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.csshttps://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css')
   body
+  div.container
+            ul
+                a(href="/liedje")
+                    li.col-md-3.col-md-offset-1 Liedje
+                a(href="/")
+                    li.col-md-3 Homepage
+                a(href="/liedje")
+                    li.col-md-3 top 10
+
+
+
+
+.row
+  .col-sm-6
+    .form-group
+      label.control-label.requiredField(for='propertyType')
+        | Dropdown menu
+      .col-xs-12
+        select#propertyType.select.form-control.input-lg(form='addProperty', name='propertyType')
+          option(value='0') -- Select --
+          option(value='6') homepage
+          option(value='7') liedjes
+          option(value='10') originele chiro site
+
   -const headStyle ={"color": "white","text-align":"center","background-color":"red"}
   -const bodyStyle ={"color": "red","text-align":"center"}
 
-    block content
+block content
 
