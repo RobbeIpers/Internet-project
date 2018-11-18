@@ -4,11 +4,11 @@ block content
     form(method='POST', action='')
         div.form-group
             .label(style=bodyStyle, for='titel') Titel: 
-                input#titel.form-control(name = "inpTitel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
+                input#titel.form-control(name = "titel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
             .label(for="artiestNaam", style=bodyStyle) Artiest: 
-                input#artiestNaam.form-controle(name="inpArtiest", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam))  
+                input#artiestNaam.form-controle(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam))  
                 button.btn.btn-primary(type='submit') Stem
-    h2(name="top 10",style=headStyle) top 10
-    ol
-        each liedje in liedje_list
-            li #{liedje.titel} door #{liedje.artiestNaam} stemmen: #{liedje.aantStemmen}
+        if errors 
+            ul
+                for error in errors
+                    li!= error.msg

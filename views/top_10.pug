@@ -1,0 +1,6 @@
+extends layout
+block content
+    h2(name="top 10",style=headStyle) top 10
+    ol
+        each liedje in liedje_list
+            li #{liedje.titel} door #{liedje.artiestNaam} stemmen: #{liedje.aantStemmen}
