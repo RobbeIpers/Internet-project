@@ -1,0 +1,14 @@
+extends layout
+block content
+    h2(style=headStyle)="LIEDJESSTEMPLAATS"
+    form(method='POST', action='')
+        div.form-group
+            .label(style=bodyStyle, for='titel') Titel: 
+                input#titel.form-control(name = "titel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
+            .label(for="artiestNaam", style=bodyStyle) Artiest: 
+                input#artiestNaam.form-controle(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam))  
+                button.btn.btn-primary(type='submit') Stem
+        if errors 
+            ul
+                for error in errors
+                    li!= error.msg
