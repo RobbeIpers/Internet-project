@@ -6,8 +6,9 @@ block content
             .label(style=bodyStyle, for='titel') Titel: 
                 input#titel.form-control(name = "titel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
             .label(for="artiestNaam", style=bodyStyle) Artiest: 
-                input#artiestNaam.form-controle(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam))  
-                button.btn.btn-primary(type='submit') Stem
+                input#artiestNaam.form-controle(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam)) 
+                div(text-allign='center')
+                    button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center") Stem
         if errors 
             ul
                 for error in errors

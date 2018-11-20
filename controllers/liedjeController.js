@@ -13,8 +13,15 @@ exports.liedje_list = function(req, res, next) {
     .sort([['aantStemmen', 'ascending']])
     .exec(function (err, list_liedjes) {
       if (err) { return next(err); }
+      var top10=[];
       //Successful, so render
-      res.render('top_10', { title: 'top 10', liedje_list: list_liedjes });
+      if(list_liedjes.length>=10){
+        for(i=0;i<10;i++){
+            top10[i]=list_liedjes[i];
+        }
+    }
+      else{top10=list_liedjes;}
+      res.render('top_10', { title: 'top 10', liedje_list: top10});
     });
 
 };
