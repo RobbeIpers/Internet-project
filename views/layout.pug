@@ -2,34 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.csshttps://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css')
+    link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
   body
-  div.container
-            ul
-                a(href="/liedje")
-                    li.col-md-3.col-md-offset-1 Liedje
-                a(href="/")
-                    li.col-md-3 Homepage
-                a(href="/liedje/top_10")
-                    li.col-md-3 top 10
-
-
-
-
-.row
-  .col-sm-6
-    .form-group
-      label.control-label.requiredField(for='propertyType')
-        | Dropdown menu
-      .col-xs-12
-        select#propertyType.select.form-control.input-lg(form='addProperty', name='propertyType')
-          option(value='0') -- Select --
-          option(value='6') homepage
-          option(value='7') liedjes
-          option(value='10') originele chiro site
-
+    div(class="w3-bar w3-red",float="left")
+        div(text-allign='left')
+            img(src= "images/download.png",class="w3-round",height="50px")
+        a(href="/",class="w3-bar-item w3-button w3-mobile") Homepage
+        a(href="/liedje",class="w3-bar-item w3-button w3-mobile") Liedje       
+        a(href="/liedje/top_10",class="w3-bar-item w3-button w3-mobile") top 10
   -const headStyle ={"color": "white","text-align":"center","background-color":"red"}
   -const bodyStyle ={"color": "red","text-align":"center"}
-
 block content
 

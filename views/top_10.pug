@@ -1,6 +1,17 @@
 extends layout
 block content
-    h2(name="top 10",style=headStyle) top 10
-    ol
-        each liedje in liedje_list
-            li #{liedje.titel} door #{liedje.artiestNaam} stemmen: #{liedje.aantStemmen}
+    -var row =1;
+    h2(name="top 10",style=headStyle,height='relative') top 10
+    
+    table(class="w3-table-all w3-hoverable")
+        tr(class="w3-red")
+            th
+            th Titel
+            th Artiest
+            th Stemmen
+            each liedje in liedje_list
+                tr
+                    td #{row++} 
+                    td #{liedje.titel}
+                    td #{liedje.artiestNaam}
+                    td #{liedje.aantStemmen}
