@@ -10,7 +10,7 @@ exports.index = function(req, res) {
 // Display list of top 10 Liedjes.
 exports.liedje_list = function(req, res, next) {
   Liedje.find()
-    .sort([['aantStemmen', 'ascending']])
+    .sort([['aantStemmen', 'descending']])
     .exec(function (err, list_liedjes) {
       if (err) { return next(err); }
       var top10=[];
@@ -43,39 +43,31 @@ body('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim(),
 sanitizeBody('titel').trim().escape(),
 sanitizeBody('artiestNaam').trim().escape(),
 (req,res,next)=>{
-    const errors=validationResult(req);
-    var liedje=new Liedje({
-        titel: req.body.titel,
-        artiestNaam: req.body.artiestNaam
-    });
-    if(!errors.isEmpty()){
-        res.render('liedje_form',{title: 'STEMMINGSPLAATS',errors:errors.array()});
-        return;
-    }
-    else
-    {
-           Liedje.findOne({ 'titel': req.body.titel })
-                .exec( function(err, found_liedje) {
-                     if (err) { return next(err); }
-
-                     if (found_liedje) {
-                         const test= found_liedje.aantStemmen+1;
-                         found_liedje.update({$set:{aantStemmen: test}});
-                            if(err){return next(err);}
-                         res.redirect('/liedje/top_10')
-                     }
-                     else {
-
-                         liedje.save(function (err) {
-                           if (err) { return next(err); }
-                           res.redirect('/liedje/top_10');
-                         });
-
-                     }
-
+        
+    //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
+    Liedje.findOne({ titel: req.body.titel, artiestNaam: req.body.artiestNaam})
+        .exec( function(err, found_liedje) {
+            if (err) { return next(err); }
+            if (found_liedje) {
+                found_liedje.aantStemmen = found_liedje.aantStemmen + 1;
+                found_liedje.save(function (err) {
+                    if (err) {return handleError(err);} // saved!
+                });
+               res.redirect('/liedje/top_10')
+            }
+    
+           else {
+                var liedje=new Liedje({
+                titel: req.body.titel,
+                artiestNaam: req.body.artiestNaam
+                });
+                liedje.save(function (err) {
+                    if (err) {return handleError(err);} // saved!
                  });
-        }
-    }
+                res.redirect('/liedje/top_10')
+            }
+        });
+}
 ];
 
 // Display Liedje delete form on GET.
