@@ -49,3 +49,18 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://<dbuser>:<dbpassword>@ds141813.mlab.com:41813/liedjesverzoeken';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
+
+
+
+
