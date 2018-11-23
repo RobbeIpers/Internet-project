@@ -45,6 +45,12 @@ sanitizeBody('artiestNaam').trim().escape(),
 (req,res,next)=>{
         
     //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
+   const errors= validationResult(req);
+    if(!errors.isEmpty()){
+        res.render('liedje_form',{title: 'STEMMINGSPLAATS', errors:errors.array()});
+        return;
+    }
+    else{
     Liedje.findOne({ titel: req.body.titel, artiestNaam: req.body.artiestNaam})
         .exec( function(err, found_liedje) {
             if (err) { return next(err); }
@@ -67,6 +73,7 @@ sanitizeBody('artiestNaam').trim().escape(),
                 res.redirect('/liedje/top_10')
             }
         });
+    }
 }
 ];
 
