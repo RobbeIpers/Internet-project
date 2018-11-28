@@ -25,8 +25,7 @@ exports.user_create_post=[
         return;
     }
 	else {
-		//checking for email and username are already taken
-        //function(err, user) {
+		//checking if email is already taken
         User.findOne({ email: req.body.email})
             .exec( function(err, mail) {
                 if(err){return next(err);}
