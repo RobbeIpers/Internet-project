@@ -12,11 +12,13 @@ var usersRouter = require('./routes/users');
 var homepageRouter = require('./routes/homepage');
 var LocalStrategy = require('passport-local').Strategy;
 var liedjeRouter = require('./routes/test');
+var config = require('./config/database');
+var passp = require('./config/passport')(passport);
 var app = express();
 
 //mongoose
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://test123:test123@ds034198.mlab.com:34198/chiro_fuif';
+var mongoDB = config.database;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
