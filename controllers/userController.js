@@ -26,9 +26,10 @@ exports.user_create_post=[
     }
 	else {
 		//checking for email and username are already taken
-        function (err, user) {
-			User.findOne({ email: {email}});
-        function (err, mail) {
+        //function(err, user) {
+        User.findOne({ email: req.body.email})
+            .exec( function(err, mail) {
+                if(err){return next(err);}
 				if (mail) {
 					res.render('register', {
 						mail: mail
@@ -36,36 +37,36 @@ exports.user_create_post=[
 				}
 				else {
 					var newUser = new User({
-						name: name,
-						email: email,
-						password: password
+						name: req.body.name,
+						email: req.body.email,
+						password: req.body.password
 					});
                     bcrypt.genSalt(10, function(err, salt){
-                        bcrypt.hash(newUser.password,salt, function(err, hash){
+                        bcrypt.hash(newUser.password, salt, function(err, hash){
                             if(err){
-                                    res.render('register',{title: 'Registreer', errors: errors.array()});
-                                }
+                                res.render('register',{title: 'Registreer', errors: errors.array()});
+                            }
                             newUser.password=hash;
                             newUser.save(function(err){
-                                        if(err){
-                                            res.render('register',{title: 'Registreer', errors: errors.array()});
-                                            return;
-                                            }
+                                if(err){
+                                    res.render('register',{title: 'Registreer', errors: errors.array()});
+                                    return;
+                                }
                                 else{
-                                    res.redirect('/user/login')}
-                            })
-                            }
+                                    res.redirect('/users/login')
+                                }
+                            });
                         });
                     });
                     
-					User.createUser(newUser, function (err, user) {
+					/*User.createUser(newUser, function (err, user) {
 						if (err) throw err;
 						console.log(user);
 					});
-					res.redirect('/users/login');
+					res.redirect('/users/login');*/
 				}
 			});
-		});
+		//};
 	}
 }
 

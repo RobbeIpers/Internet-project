@@ -6,11 +6,12 @@ var user_controller = require('../controllers/userController');
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/log_in', function(req, res, next) {
-  res.render('login',{title:'Log In'});
+router.get('/login', function(req, res, next) {
+  res.render('login', {title: 'Log In'});
 });
+//register form  
 router.get('/register', function(req, res, next) {
-  res.render('register',{title:'Register'});
+  res.render('register', {title: 'Register'});
 });
 router.post('/register', user_controller.user_create_post);
 
