@@ -3,14 +3,18 @@ html
   head
     title= title
     link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
-    div(class="w3-bar w3-red",float="left")
+    div(class="w3-bar w3-red")
         div(text-allign='left')
             img(src= "images/download.png",class="w3-round",height="50px")
         a(href="/",class="w3-bar-item w3-button w3-mobile") Homepage
         a(href="/liedje",class="w3-bar-item w3-button w3-mobile") Liedje       
         a(href="/liedje/top_10",class="w3-bar-item w3-button w3-mobile") top 10
-  -const headStyle ={"color": "white","text-align":"center","background-color":"red"}
+        a(href="/users/log_in",class="w3-bar-item w3-button w3-mobile") log in
+        a(href="/users/register",class="w3-bar-item w3-button w3-mobile") register
+
   -const bodyStyle ={"color": "red","text-align":"center"}
 block content
 

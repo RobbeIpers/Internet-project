@@ -1,0 +1,11 @@
+extends layout
+block content
+    h2 Account Login
+    form(method="post" action="/users/login")
+      div(class="form-group")
+        label Username: 
+        input(type="text" class="form-control" name="username" placeholder="Username")
+      div(class="form-group")
+        label Password: 
+        input(type="password" class="form-control" name="password" placeholder="Password")
+      button(type="submit" class="btn btn-default") Submit

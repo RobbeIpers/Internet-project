@@ -1,13 +1,13 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
+  
 }
-nav{
-    position: fixed;
-    top:0;
-    left:0;
+form-group{
+    padding:50px;
+    align-content: center;
+}
+h1{
+    color: white;
+    text-align:center;
+    background-color:red;
 }

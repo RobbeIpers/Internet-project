@@ -5,10 +5,19 @@ const { sanitizeBody } = require('express-validator/filter');
 var Schema = mongoose.Schema;
 
 var Liedje = new Schema({
-    titel          : {type: String, required: true},
-    artiestNaam    : {type: String, required: true},
-    aantStemmen    : {type: Number, default: 1}
+    titel          : {
+        type: String,
+        required: true
+    },
+    artiestNaam    : {
+        type: String, required: true
+    },
+    aantStemmen    : {
+        type: Number,
+        default: 1
+    }
 });
+
 Liedje
 .virtual('url')
 .get(function () {
