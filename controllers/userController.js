@@ -6,8 +6,6 @@ const { sanitizeBody } = require('express-validator/filter');
 
 // Register User
 exports.user_create_post=[
-	// Validation
-	
 	
     //body('password','Wachtwoorden zijn niet gelijk').equals(function(req,res,next){req.body.password2;}),
 	//body('password2', 'Passwords do not match').equals(req.body.password),
@@ -57,16 +55,9 @@ exports.user_create_post=[
                                 }
                             });
                         });
-                    });
-                    
-					/*User.createUser(newUser, function (err, user) {
-						if (err) throw err;
-						console.log(user);
-					});
-					res.redirect('/users/login');*/
+                    });	
 				}
 			});
-		//};
 	}
 }
 
@@ -82,9 +73,5 @@ module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }
 
-module.exports.comparePassword = function(candidatePassword, hash, callback){
-	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-    	if(err) throw err;
-    	callback(null, isMatch);
-	});
-}
+
+

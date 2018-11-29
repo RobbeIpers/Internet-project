@@ -4,16 +4,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
-var passport = require('passport');
 var expressValidator = require('express-validator');
+var session = require('express-session');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homepageRouter = require('./routes/homepage');
-var LocalStrategy = require('passport-local').Strategy;
 var liedjeRouter = require('./routes/test');
+
+var LocalStrategy = require('passport-local').Strategy;
 var config = require('./config/database');
-var passp = require('./config/passport')(passport);
+var passport = require('passport');
 var app = express();
 
 //mongoose
@@ -23,6 +24,8 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//models
+var User=require('./models/user');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,13 +41,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret',
     saveUninitialized: true,
-    resave:true 
+    resave: true
 })); 
+//express messages
+app.use(require('connect-flash')());
+app.use(function(req,res,next){
+    res.locals.messsages=require('express-messages')(req,res);
+    next();
+});
 
-// Passport init
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
 // Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -63,16 +68,12 @@ app.use(expressValidator({
   }
 }));
 
+require('./config/passport')(passport);
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
 // Global Vars
-app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null;
-  next();
-});
 
-// Connect Flash
 
 
 app.use('/', indexRouter);
