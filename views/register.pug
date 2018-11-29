@@ -1,6 +1,6 @@
 extends layout
 block content
-    h2 Registreren
+    h1 Registreren
     form(method="post" action="/users/register")
         div(class="form-group")
             label Name: 
@@ -14,7 +14,7 @@ block content
         div(class="form-group")
             label Confirm Password: 
             input(type="password" class="form-control" placeholder="Password" name="password2")
-        button(type="submit" class="btn btn-default") Submit
+        button(type="submit",class='w3-button w3-white w3-border w3-border-red w3-round') Submit
         
         if errors 
             ul

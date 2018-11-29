@@ -1,11 +1,11 @@
 extends layout
 block content
-    h2 Account Login
+    h1 Account Login
     form(method="post" action="/users/login")
       div(class="form-group")
-        label Username: 
+        label(style=bodyStyle) Username: 
         input(type="text" class="form-control" name="username" placeholder="Username")
       div(class="form-group")
-        label Password: 
+        label(style=bodyStyle) Password: 
         input(type="password" class="form-control" name="password" placeholder="Password")
-      button(type="submit" class="btn btn-default") Submit
+      button(type="submit" class='w3-button w3-white w3-border w3-border-red w3-round') Submit

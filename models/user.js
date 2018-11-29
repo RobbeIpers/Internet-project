@@ -16,7 +16,11 @@ var UserSchema = mongoose.Schema({
 	email: {
 		type: String,
         required:true
-	}
+	},
+    aantStemmen:{
+        type: Number,
+        default: 3
+}
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

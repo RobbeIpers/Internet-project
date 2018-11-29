@@ -6,22 +6,23 @@ const { sanitizeBody } = require('express-validator/filter');
 
 // Register User
 exports.user_create_post=[
-    (req,res,next)=>{ 
 	// Validation
-	body('name', 'Name is required').isLength({ min: 1 }).trim(),
-	body('email', 'Email is required').isLength({ min: 1 }).trim(),
-	body('email', 'Email is not valid').isEmail(),
-	body('password', 'Password is required').isLength({min: 1}),
-	body('password2', 'Passwords do not match').equals(req.body.password),
+	
+	
+    //body('password','Wachtwoorden zijn niet gelijk').equals(function(req,res,next){req.body.password2;}),
+	//body('password2', 'Passwords do not match').equals(req.body.password),
     //sanitize
     sanitizeBody('name').trim().escape(),
-    sanitizeBody('email').trim().escape();
-    
-       
-	const errors = validationResult(req);
-    console.log('name');
-	if(!errors.isEmpty()){
-        res.render('register',{title: 'Registreer', errors: errors.array()});
+    sanitizeBody('email').trim().escape(),
+    (req,res,next)=>{  
+    req.checkBody('email', 'Vul email in').isLength({ min: 1 }).trim(),
+	req.checkBody('email', 'Een correcte email aub').isEmail(),
+	req.checkBody('password', 'Vul een wachtwoord in').isLength({min: 1}),    
+    req.checkBody('name', 'Vul het naam vak in').notEmpty();
+    req.checkBody('password2','wachtwoorden zijn verschillend').equals(req.body.password);  
+	var errors = req.validationErrors();
+	if(errors){
+        res.render('register',{title: 'Registreer', errors: errors});
         return;
     }
 	else {
