@@ -72,6 +72,11 @@ module.exports.getUserByUsername = function(username, callback){
 module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }
-
+exports.isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    else res.redirect('/users/login');
+}
 
 

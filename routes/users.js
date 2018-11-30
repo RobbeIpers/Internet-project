@@ -16,7 +16,7 @@ router.get('/login', function(req, res, next) {
 //login process
 router.post('/login', function(req, res, next){
     passport.authenticate('local',{
-            successRedirect:'/',
+            successRedirect:'/liedje',
             failureRedirect: '/users/login',
             failureFlash: 'true'
         })(req,res,next);
@@ -28,5 +28,17 @@ router.get('/register', function(req, res, next) {
 });
 router.post('/register', user_controller.user_create_post);
 
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
 
 module.exports = router;
