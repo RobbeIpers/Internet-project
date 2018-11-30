@@ -20,3 +20,7 @@ block content
             ul
                 for error in errors
                     li!= error.msg
+        if(showErrors==true)
+            ul(class="errors")
+                for val in errors
+                        li!= val

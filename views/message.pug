@@ -1,0 +1,7 @@
+extends layout
+.messages
+  each type in Object.keys(messages)
+    each message in messages(type)
+      //div #{message}
+      div(class="alert alert-"+type) #{message}
+      

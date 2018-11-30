@@ -7,8 +7,6 @@ const { sanitizeBody } = require('express-validator/filter');
 // Register User
 exports.user_create_post=[
 	
-    //body('password','Wachtwoorden zijn niet gelijk').equals(function(req,res,next){req.body.password2;}),
-	//body('password2', 'Passwords do not match').equals(req.body.password),
     //sanitize
     sanitizeBody('name').trim().escape(),
     sanitizeBody('email').trim().escape(),
@@ -20,6 +18,7 @@ exports.user_create_post=[
     req.checkBody('password2','wachtwoorden zijn verschillend').equals(req.body.password);  
 	var errors = req.validationErrors();
 	if(errors){
+        req.flash('error', 'test');
         res.render('register',{title: 'Registreer', errors: errors});
         return;
     }

@@ -11,7 +11,7 @@ module.exports = function(passport){
         User.findOne(query, function(err,user){
             if(err) throw err;
             if(!user){
-                return done(null,false, {message: 'No user found'});
+                return done(null,false, {message: 'Username is incorrect'});
             }
             
             //match password

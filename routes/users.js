@@ -11,20 +11,42 @@ router.get('/', function(req, res, next) {
 
 //login form
 router.get('/login', function(req, res, next) {
-  res.render('login', {title: 'Log In'});
+    var flashMessages = res.locals.getMessages();
+    console.log('flash', flashMessages);
+    
+    if(flashMessages.error){
+        res.render('login', {
+            showErrors: true,
+            errors: flashMessages.error
+        });
+    }
+    else{
+        res.render('login', {title: 'Log In'});
+    }
 });
 //login process
 router.post('/login', function(req, res, next){
     passport.authenticate('local',{
             successRedirect:'/liedje',
             failureRedirect: '/users/login',
-            failureFlash: 'true'
+            failureFlash: true
         })(req,res,next);
 });
 
 //register form  
 router.get('/register', function(req, res, next) {
-  res.render('register', {title: 'Register'});
+    var flashMessages = res.locals.getMessages();
+    console.log('flash', flashMessages);
+    
+    if(flashMessages.error){
+        res.render('login', {
+            showErrors: true,
+            errors: flashMessages.error
+        });
+    }
+    else{
+        res.render('register', {title: 'Register'});
+    }
 });
 router.post('/register', user_controller.user_create_post);
 

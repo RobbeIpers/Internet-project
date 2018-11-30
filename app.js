@@ -1,5 +1,5 @@
 var createError = require('http-errors');
-var flash = require('connect-flash');
+var flash = require('express-flash-messages');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -40,17 +40,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Express Session
 app.use(session({
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    resave: true,
+    saveUninitialized: true
+    
 })); 
+
+app.use(flash());
+//app.use(expressValidator());
+
 //express messages
-app.use(require('connect-flash')());
+/*app.use(require('connect-flash')());
 app.use(function(req,res,next){
     res.locals.messsages=require('express-messages')(req,res);
     next();
-});
+});*/
 
-// Express Validator
+//Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
@@ -67,6 +72,7 @@ app.use(expressValidator({
     };
   }
 }));
+
 
 require('./config/passport')(passport);
 // Passport init
