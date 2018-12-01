@@ -33,22 +33,6 @@ exports.liedje_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);
 };
 
-// Display Liedje create form on GET.
-/*exports.liedje_create_get = function(req, res) {
-    var flashMessages = res.locals.getMessages();
-    console.log('flash', flashMessages);
-    
-    if(flashMessages.error){
-        res.render('liedje_form', {
-            showErrors: true,
-            errors: flashMessages.error
-        });
-    }
-    else{
-        res.render('liedje_form', { title: 'STEMPLAATS' });
-    }
-};*/
-
 // Handle Liedje create on POST.
 exports.liedje_create_post =[
     
@@ -61,11 +45,7 @@ exports.liedje_create_post =[
         req.checkBody('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim();
         
     //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
-  /* const errors= validationResult(req);
-    if(!errors.isEmpty()){
-        res.render('liedje_form',{title: 'STEMMINGSPLAATS', errors:errors.array()});
-        return;
-    }*/
+ 
     req.getValidationResult()
         .then(function(result) {
             if (result.isEmpty() === false) {
@@ -81,7 +61,12 @@ exports.liedje_create_post =[
                         if (found_liedje) {
                             found_liedje.aantStemmen = found_liedje.aantStemmen + 1;
                             found_liedje.save(function (err) {
-                                if (err) {return handleError(err);} // saved!
+                                if (err) {
+                                    req.flash('error', 'There was a problem with saving you song');
+                                    res.redirect('/liedje');
+                                    
+                                    //return handleError(err);
+                                } // saved!
                             });
                            res.redirect('/liedje/top_10')
                         }
@@ -92,7 +77,11 @@ exports.liedje_create_post =[
                             artiestNaam: req.body.artiestNaam
                             });
                             liedje.save(function (err) {
-                                if (err) {return handleError(err);} // saved!
+                                if (err) {
+                                    req.flash('error', 'There was a problem with saving you song');
+                                    res.redirect('/liedje');
+                                    //return handleError(err);
+                                } // saved!
                              });
                             res.redirect('/liedje/top_10')
                         }

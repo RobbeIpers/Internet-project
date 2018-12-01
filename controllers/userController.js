@@ -35,7 +35,9 @@ exports.user_create_post=[
                     bcrypt.genSalt(10, function(err, salt){
                         bcrypt.hash(newUser.password, salt, function(err, hash){
                             if(err){
-                                res.render('register',{title: 'Registreer', errors: errors.array()});
+                                req.flash('error', 'There was a problem with your registration');
+                                res.render('register',{title: 'Registreer', //errors: errors.array()
+                                });
                             }
                             newUser.password=hash;
                             newUser.save(function(err){
