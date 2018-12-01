@@ -39,7 +39,7 @@ router.get('/register', function(req, res, next) {
     console.log('flash', flashMessages);
     
     if(flashMessages.error){
-        res.render('login', {
+        res.render('register', {
             showErrors: true,
             errors: flashMessages.error
         });
