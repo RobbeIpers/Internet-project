@@ -15,7 +15,7 @@ exports.user_create_post=[
         sanitizeBody('email').trim().escape(),
         req.checkBody('email', 'Vul email in').isLength({ min: 1 }).trim();
         req.checkBody('email', 'Een correcte email aub').isEmail();
-        req.checkBody('password', 'Vul een wachtwoord in').isLength({min: 1});    
+        req.checkBody('password', 'Vul een wachtwoord in').isLength({min: 1});
         req.checkBody('name', 'Vul het naam vak in').notEmpty();
         req.checkBody('password2','wachtwoorden zijn verschillend').equals(req.body.password);
         req.getValidationResult()
