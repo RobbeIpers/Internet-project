@@ -80,8 +80,10 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 // Global Vars
-
-
+app.get('*',function(req, res, next){
+    res.locals.user=req.user||null;
+    next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
