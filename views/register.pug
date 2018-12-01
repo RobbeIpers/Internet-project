@@ -16,10 +16,6 @@ block content
             input(type="password" class="form-control" placeholder="Password" name="password2")
         button(type="submit",class='w3-button w3-white w3-border w3-border-red w3-round') Submit
         
-        if errors 
-            ul
-                for error in errors
-                    li!= error.msg
         if(showErrors==true)
             ul(class="errors")
                 for val in errors
