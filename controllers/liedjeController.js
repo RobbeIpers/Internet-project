@@ -1,3 +1,5 @@
+var express=require('express');
+var router = express.Router();
 var Liedje = require('../models/liedje');
 var async =require('async')
 
@@ -32,48 +34,71 @@ exports.liedje_detail = function(req, res) {
 };
 
 // Display Liedje create form on GET.
-exports.liedje_create_get = function(req, res) {
-    res.render('liedje_form', { title: 'STEMPLAATS' });
-};
+/*exports.liedje_create_get = function(req, res) {
+    var flashMessages = res.locals.getMessages();
+    console.log('flash', flashMessages);
+    
+    if(flashMessages.error){
+        res.render('liedje_form', {
+            showErrors: true,
+            errors: flashMessages.error
+        });
+    }
+    else{
+        res.render('liedje_form', { title: 'STEMPLAATS' });
+    }
+};*/
 
 // Handle Liedje create on POST.
 exports.liedje_create_post =[
-body('titel', 'Titel required').isLength({ min: 1 }).trim(),
-body('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim(),
-sanitizeBody('titel').trim().escape(),
-sanitizeBody('artiestNaam').trim().escape(),
-(req,res,next)=>{
+    
+    
+    //sanitize
+    (req,res,next)=>{
+        sanitizeBody('titel').trim().escape(),
+        sanitizeBody('artiestNaam').trim().escape(),
+        req.checkBody('titel', 'Titel required').isLength({ min: 1 }).trim();
+        req.checkBody('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim();
         
     //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
-   const errors= validationResult(req);
+  /* const errors= validationResult(req);
     if(!errors.isEmpty()){
         res.render('liedje_form',{title: 'STEMMINGSPLAATS', errors:errors.array()});
         return;
-    }
-    else{
-    Liedje.findOne({ titel: req.body.titel, artiestNaam: req.body.artiestNaam})
-        .exec( function(err, found_liedje) {
-            if (err) { return next(err); }
-            if (found_liedje) {
-                found_liedje.aantStemmen = found_liedje.aantStemmen + 1;
-                found_liedje.save(function (err) {
-                    if (err) {return handleError(err);} // saved!
-                });
-               res.redirect('/liedje/top_10')
+    }*/
+    req.getValidationResult()
+        .then(function(result) {
+            if (result.isEmpty() === false) {
+                result.array().forEach((error) => {
+                    req.flash('error', error.msg);
+                })
+                res.redirect('/liedje');
             }
-    
-           else {
-                var liedje=new Liedje({
-                titel: req.body.titel,
-                artiestNaam: req.body.artiestNaam
-                });
-                liedje.save(function (err) {
-                    if (err) {return handleError(err);} // saved!
-                 });
-                res.redirect('/liedje/top_10')
+            else{
+                Liedje.findOne({ titel: req.body.titel, artiestNaam: req.body.artiestNaam})
+                    .exec( function(err, found_liedje) {
+                        if (err) { return next(err); }
+                        if (found_liedje) {
+                            found_liedje.aantStemmen = found_liedje.aantStemmen + 1;
+                            found_liedje.save(function (err) {
+                                if (err) {return handleError(err);} // saved!
+                            });
+                           res.redirect('/liedje/top_10')
+                        }
+
+                       else {
+                            var liedje=new Liedje({
+                            titel: req.body.titel,
+                            artiestNaam: req.body.artiestNaam
+                            });
+                            liedje.save(function (err) {
+                                if (err) {return handleError(err);} // saved!
+                             });
+                            res.redirect('/liedje/top_10')
+                        }
+                    });
             }
         });
-    }
 }
 ];
 
