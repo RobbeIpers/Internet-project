@@ -14,3 +14,11 @@ block content
             ul(class="errors")
                 for val in errors
                         li!= val
+                        
+        if(tracks)
+            //-const jej = "\u0023text"
+            each val in [0,1,2]
+                li  
+                    |#{tracks.results.trackmatches.track[val].name} van  #{tracks.results.trackmatches.track[val].artist}
+    
+                    

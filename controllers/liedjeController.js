@@ -1,7 +1,7 @@
-var express=require('express');
+var express = require('express');
 var router = express.Router();
 var Liedje = require('../models/liedje');
-var async =require('async')
+var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -34,11 +34,61 @@ exports.liedje_detail = function(req, res) {
 };
 
 // Handle Liedje create on POST.
-exports.liedje_create_post =[
-    
+exports.liedje_create_post =function(req, res ,next){
     
     //sanitize
-    (req,res,next)=>{
+        sanitizeBody('titel').trim().escape(),
+        sanitizeBody('artiestNaam').trim().escape(),
+        req.checkBody('titel', 'Titel required').isLength({ min: 1 }).trim();
+       // req.checkBody('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim();
+        
+    //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
+ 
+    req.getValidationResult()
+        .then(function(result) {
+            if (result.isEmpty() === false) {
+                result.array().forEach((error) => {
+                    req.flash('error', error.msg);
+                })
+             res.redirect('/liedje');}
+            else{      
+                var request = require("request");
+                var options = { method: 'GET', 
+                  url: 'http://ws.audioscrobbler.com/2.0/',
+                  qs: 
+                   { method: 'track.search',
+                    track: req.body.titel,
+                    artist: req.body.artiestNaam,
+                     user: 'test',
+                     api_key: '361509ff27fc66e53f9418a2e1f10b65',
+                     limit: '3',
+                     format: 'json',
+                    },
+                  headers: 
+                   { 'Postman-Token': '1a37e0a4-b888-4155-a517-058c5ca5724a',
+                     'cache-control': 'no-cache' } 
+                    };
+
+                request(options, function (error, response, body) {
+                  if (error) throw new Error(error);
+
+                    var myJSON=body;
+                    var myobj=JSON.parse(myJSON);
+                    //var string="#text";
+                    res.render('liedje_form',{tracks:myobj});
+                    
+                    //console.log(myobj.results.trackmatches.track[1].image[1].);
+                    console.log(req.body.titel);
+                  console.log(myobj.results.trackmatches.track[0].name);
+                });
+                
+        }
+    }
+)};
+
+/*
+        
+        
         sanitizeBody('titel').trim().escape(),
         sanitizeBody('artiestNaam').trim().escape(),
         req.checkBody('titel', 'Titel required').isLength({ min: 1 }).trim();
@@ -88,8 +138,8 @@ exports.liedje_create_post =[
                     });
             }
         });
-}
-];
+}];
+*/
 
 // Display Liedje delete form on GET.
 exports.liedje_delete_get = function(req, res) {
