@@ -22,7 +22,11 @@ router.get('/',user_controller.isAuthenticated, function(req, res, next) {
 
 // POST request for creating Liedje.
 router.post('/', liedje_controller.liedje_create_post);
-
+router.get('/stem',function(req,res,next){
+    res.render('homepage');
+    console.log(req.body.titel);
+});
+router.post('/stem',liedje_controller.stem);
 /* GET home page. */
 module.exports = router;
 

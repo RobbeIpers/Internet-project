@@ -33,9 +33,15 @@ exports.liedje_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);
 };
 
+
+exports.stem =function(req, res ,next){
+    console.log(req.body.titel2);
+    console.log(req.body.artiestNaam2);
+    res.render(liedje_form);
+}
 // Handle Liedje create on POST.
 exports.liedje_create_post =function(req, res ,next){
-    
+
     //sanitize
         sanitizeBody('titel').trim().escape(),
         sanitizeBody('artiestNaam').trim().escape(),
@@ -75,16 +81,14 @@ exports.liedje_create_post =function(req, res ,next){
                     var myJSON=body;
                     var myobj=JSON.parse(myJSON);
                     //var string="#text";
-                    res.render('liedje_form',{tracks:myobj});
-                    
-                    //console.log(myobj.results.trackmatches.track[1].image[1].);
-                    console.log(req.body.titel);
-                  console.log(myobj.results.trackmatches.track[0].name);
-                });
+                    var imgArr=[myobj.results.trackmatches.track[0].image[1]['#text'],myobj.results.trackmatches.track[1].image[1]['#text'],myobj.results.trackmatches.track[2].image[1]['#text']]
+                    res.render('liedje_form',{tracks:myobj,img:imgArr});
+                              });
                 
-        }
-    }
-)};
+                }
+            })
+    
+};
 
 /*
         
