@@ -1,6 +1,7 @@
 var express=require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Stem = require('../models/stem');
 var async =require('async');
 var bcrypt= require('bcryptjs');
 const { body,validationResult } = require('express-validator/check');
@@ -62,6 +63,18 @@ exports.user_create_post=[
     }
 
 ];
+
+module.exports.stem_list = function(req, res, next) {
+  Stem.find({email: req.user.email})
+    .exec(function (err, list_stemmen) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('account', { title: req.user.naam, stemmen: list_stemmen});
+    });
+
+};
+
+
 
 
 module.exports.getUserByUsername = function(username, callback){

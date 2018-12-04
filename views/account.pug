@@ -3,7 +3,14 @@ extends layout
 block content
   h1(style=headStyle)= title
   div
-    | welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} stemmen
+    | welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} 
+    if(user.aantStemmen>1)
+      |stemmen
+    else 
+      |stem
+    each stem in stemmen
+        li #{stem.titel} van #{stem.artiestNaam}
+        
     #fb-root
     script.
       (function(d, s, id) {

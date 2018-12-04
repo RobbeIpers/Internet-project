@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Liedje = require('../models/liedje');
+var Stem = require('../models/stem');
 var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
@@ -35,6 +36,24 @@ exports.liedje_detail = function(req, res) {
 
 
 exports.stem =function(req, res ,next){
+    var stem= new Stem({
+       titel: req.body.titel2,
+       artiestNaam: req.body.artiest2,
+       email:req.user.email
+    });
+     stem.save(function (err) {
+        if (err) {
+            req.flash('error', 'Er was een probleem met je stem');
+            res.redirect('/liedje');
+        } 
+     });
+    req.user.aantStemmen=req.user.aantStemmen - 1;
+    req.user.save(function (err) {
+                                if (err) {
+                                    req.flash('error', 'There was a problem with saving your stem');
+                                    res.redirect('/liedje');
+                                } // saved!
+                            });
     Liedje.findOne({ titel: req.body.titel2, artiestNaam: req.body.artiest2})
                     .exec( function(err, found_liedje) {
                         if (err) { return next(err); }
@@ -42,7 +61,7 @@ exports.stem =function(req, res ,next){
                             found_liedje.aantStemmen = found_liedje.aantStemmen + 1;
                             found_liedje.save(function (err) {
                                 if (err) {
-                                    req.flash('error', 'There was a problem with saving you song');
+                                    req.flash('error', 'There was a problem with saving your song');
                                     res.redirect('/liedje');
                                 } // saved!
                             });
@@ -56,14 +75,14 @@ exports.stem =function(req, res ,next){
                             });
                             liedje.save(function (err) {
                                 if (err) {
-                                    req.flash('error', 'There was a problem with saving you song');
+                                    req.flash('error', 'There was a problem with saving your song');
                                     res.redirect('/liedje');
                                     //return handleError(err);
                                 } // saved!
                              });
                             res.redirect('/liedje/top_10')
                         }
-            })
+            });
 }
 // Handle Liedje create on POST.
 exports.liedje_create_post =function(req, res ,next){
@@ -106,14 +125,11 @@ if(req.user.aantStemmen===0){
                     };
 
                 request(options, function (error, response, body) {
-                  if (error) throw new Error(error);
-
                     var myJSON=body;
                     var myobj=JSON.parse(myJSON);
-                    //var string="#text";
-                    var imgArr=[myobj.results.trackmatches.track[0].image[1]['#text'],myobj.results.trackmatches.track[1].image[1]['#text'],myobj.results.trackmatches.track[2].image[1]['#text']]
+                    var imgArr=[myobj.results.trackmatches.track[0].image[1]['#text'],myobj.results.trackmatches.track[1].image[1]['#text'],myobj.results.trackmatches.track[2].image[1]['#text']];
                     res.render('liedje_form',{tracks:myobj,img:imgArr});
-                        });
+                    });
                 }
             })
     

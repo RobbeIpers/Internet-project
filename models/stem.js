@@ -13,7 +13,7 @@ var Stem = new Schema({
         type: String, required: true
     },
     email    : {
-        type: Number,
+        type: String,
         default: 1
     }
 });
