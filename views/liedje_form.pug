@@ -15,17 +15,36 @@ block content
                 for val in errors
                         li!= val
                         
-        div(class='searchResultaat')                
-            if(tracks)
-                |Bedoelde je één van deze liedjes
-                each val in [0,1,2]
-                    form(method='POST', action='/stem')
-                      div.form-group  
-                        if(img)
-                            img(src=img[val]) 
-                            k#titel2.form-control(name="titel2", value=(undefined===liedje ? '' : liedje.artiestNaam2))  #{tracks.results.trackmatches.track[val].name} 
-                                |van
-                            k#artiestNaam2.form-control(name="artiestNaam2", value=(undefined===liedje ? '' : liedje.titel2))  #{tracks.results.trackmatches.track[val].artist}   
-                            button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="stem") stem
-    
-                    
+    div(class='searchResultaat')                
+        if(tracks)
+            |Bedoelde je aan van deze liedjes
+            form(method='POST', action='liedje/stem')
+                div.form-group  
+                    if(img)
+                        img(src=img[0]) 
+                    |#{tracks.results.trackmatches.track[0].name} 
+                    input#titel2.form-control(name = "titel2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[0].name,hidden=true)
+                    |van 
+                    | #{tracks.results.trackmatches.track[0].artist}
+                    input#artiest2.form-control(name = "artiest2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[0].artist,hidden=true)
+                    button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="stem") stem
+            form(method='POST', action='liedje/stem')
+                div.form-group  
+                    if(img)
+                        img(src=img[1]) 
+                    |#{tracks.results.trackmatches.track[1].name} 
+                    input#titel2.form-control(name = "titel2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[1].name,hidden=true)
+                    |van 
+                    | #{tracks.results.trackmatches.track[1].artist}
+                    input#artiest2.form-control(name = "artiest2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[1].artist,hidden=true)
+                    button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="stem") stem
+            form(method='POST', action='liedje/stem')
+                div.form-group  
+                    if(img)
+                        img(src=img[0]) 
+                    |#{tracks.results.trackmatches.track[2].name} 
+                    input#titel2.form-control(name = "titel2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[2].name,hidden=true)
+                    |van 
+                    | #{tracks.results.trackmatches.track[2].artist}
+                    input#artiest2.form-control(name = "artiest2", type="text", placeholder="vb Baby" value=tracks.results.trackmatches.track[2].artist,hidden=true)
+                    button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="stem") stem
