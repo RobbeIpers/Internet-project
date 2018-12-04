@@ -13,6 +13,7 @@ var homepageRouter = require('./routes/homepage');
 var liedjeRouter = require('./routes/test');
 
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('./config/database');
 var passport = require('passport');
 var app = express();

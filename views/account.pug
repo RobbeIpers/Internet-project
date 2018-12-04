@@ -4,8 +4,16 @@ block content
   h1(style=headStyle)= title
   div
     | welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} stemmen
-  
-  
-    
-    
-    
+    #fb-root
+    script.
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/nl_BE/sdk.js#xfbml=1&version=v3.2&appId=502849933557463&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    .fb-share-button(data-href='http://localhost:3000/users/account', data-mobile-iframe='true', data-size='small', data-layout='button')
+      a.fb-xfbml-parse-ignore(href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fusers%2Faccount%2F&src=sdkpreparse', target='_blank') Delen
+
+        
