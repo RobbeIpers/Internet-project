@@ -35,9 +35,7 @@ exports.liedje_zoek = function(req,res){
     Liedje.find({'titel': /^Le/}).select('-_id titel')
     //select('-_id titel artiestNaam aantStemmen')
     .exec(function(err,gezochte_liedjes){
-        console.log('error ajax1');
         if(err){return next(err);}
-        console.log('error ajax1');
         console.log(gezochte_liedjes);
         res.send(gezochte_liedjes);
         
