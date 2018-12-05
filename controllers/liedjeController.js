@@ -29,6 +29,21 @@ exports.liedje_list = function(req, res, next) {
 
 };
 
+//Display gezochte liedje
+exports.liedje_zoek = function(req,res){
+    console.log('ajax  req  '+req.params.id);
+    Liedje.find({'titel': /^Le/}).select('-_id titel')
+    //select('-_id titel artiestNaam aantStemmen')
+    .exec(function(err,gezochte_liedjes){
+        console.log('error ajax1');
+        if(err){return next(err);}
+        console.log('error ajax1');
+        console.log(gezochte_liedjes);
+        res.send(gezochte_liedjes);
+        
+    });
+};
+
 // Display detail page for a specific Liedje.
 exports.liedje_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);

@@ -2,7 +2,12 @@ extends layout
 block content
     -var row =1;
     h1=title
-    
+    div(class="form-group")
+        label(style=bodyStyle) Liedje: 
+        input(type="text", class="form-control", name="zoekLiedje", placeholder="zoek liedje", onKeyUp="showHint(this.value)")
+        label(style=bodystyle, id="idveld") Suggesties:
+        
+        
     table(class="w3-table-all w3-hoverable")
         tr(class="w3-red")
             th
@@ -15,3 +20,4 @@ block content
                     td #{liedje.titel}
                     td #{liedje.artiestNaam}
                     td #{liedje.aantStemmen}
+    script(src="/ajax.js")

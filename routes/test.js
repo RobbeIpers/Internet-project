@@ -4,6 +4,9 @@ var liedje_controller = require('../controllers/liedjeController');
 var user_controller = require('../controllers/userController');
 router.get('/top_10', liedje_controller.liedje_list);
 
+
+router.get('/zoek', liedje_controller.liedje_zoek);
+
 //GET request 
 router.get('/',user_controller.isAuthenticated, function(req, res, next) {
     var flashMessages = res.locals.getMessages();
@@ -19,6 +22,7 @@ router.get('/',user_controller.isAuthenticated, function(req, res, next) {
         res.render('liedje_form', {title: 'Liedje'});
     }
 });
+
 
 // POST request for creating Liedje.
 router.post('/', liedje_controller.liedje_create_post);
