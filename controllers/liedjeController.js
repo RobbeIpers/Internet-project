@@ -127,8 +127,15 @@ if(req.user.aantStemmen===0){
                 request(options, function (error, response, body) {
                     var myJSON=body;
                     var myobj=JSON.parse(myJSON);
-                    var imgArr=[myobj.results.trackmatches.track[0].image[1]['#text'],myobj.results.trackmatches.track[1].image[1]['#text'],myobj.results.trackmatches.track[2].image[1]['#text']];
-                    res.render('liedje_form',{tracks:myobj,img:imgArr});
+                    var imgArr= ["","","","",""];
+                    var i=0;
+                    if(myobj.results.trackmatches.track.length===0){var niets=0;}else niets=1;
+                    for (i=0;i< myobj.results.trackmatches.track.length;i++){
+                        imgArr[i]=myobj.results.trackmatches.track[i].image[1]['#text'];
+                        console.log(imgArr[i]);
+                        
+                    }
+                    res.render('liedje_form',{tracks:myobj,img:imgArr,niets:niets});
                     });
                 }
             })
