@@ -1,23 +1,25 @@
 extends layout
 block content
     h1 Registreren
-    form(method="post" action="/users/register")
-        div(class="form-group")
-            label Name: 
-            input(type="text" class="form-control" placeholder="Name" name="name")
-        div(class="form-group")
-            label Email: 
-            input(type="email" class="form-control" placeholder="Email" name="email")
-        div(class="form-group")
-            label Password: 
-            input(type="password" class="form-control" placeholder="Password" name="password")
-        div(class="form-group")
-            label Confirm Password: 
-            input(type="password" class="form-control" placeholder="Password" name="password2")
-        button(type="submit",class='w3-button w3-white w3-border w3-border-red w3-round') Submit
-        
-        if(showErrors==true)
-            ul(class="errors")
-                for val in errors
-                        li!= val
-    
+    div(class="normal")
+        form(method="post" action="/users/register")
+            div(class="form-group")
+                label Name: 
+                input.form-control(type="text" class="form-control" placeholder="Name" name="name")
+            div(class="form-group")
+                label Email: 
+                input(type="email" class="form-control" placeholder="Email" name="email")
+            div(class="form-group")
+                label Password: 
+                input(type="password" class="form-control" placeholder="Password" name="password")
+            div(class="form-group")
+                label Confirm Password: 
+                input(type="password" class="form-control" placeholder="Password" name="password2")
+            div(class="form-group")
+                button(type="submit",class='w3-button w3-white w3-border w3-border-red w3-round') Submit
+
+    if(showErrors==true)
+        ul(class="errors")
+            for val in errors
+                    li!= val
+

@@ -2,10 +2,14 @@ doctype html
 html
   head
     title= title
+    meta(nam="viewpport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
     script(type="text/javascript" src="lastfm.api.md5.js")
     script(type="text/javascript" src="lastfm.api.js")
+    link(rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href="https://fonts.googleapis.com/css?family=Kumar+One+Outline" rel="stylesheet")
+
 
   body
     div(class="w3-bar w3-red")
@@ -23,5 +27,6 @@ html
         
   .container
   -const bodyStyle ={"color": "red","text-align":"center"}
-    block content
-
+  block content
+  footer(float="bottom") 2018 Copyright:
+     a(href="https://chiroludiek.be/") © Chiro ludiek

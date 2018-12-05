@@ -1,10 +1,4 @@
-test{
-    padding:50px;
-}
-form-group{
-    padding:50px;
-    align-content: center;
-}
+
 h1{
     color: white;
     text-align:center;
@@ -21,4 +15,13 @@ h1{
 }
 searchResultaat{
     padding: 50px;
+}
+.normal{
+    padding:30px;
+}
+h2{
+    margin-top: 0px;
+    padding-top: 10px;
+    font-family: 'Kumar One Outline', cursive;
+
 }
