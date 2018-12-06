@@ -32,7 +32,6 @@ exports.liedje_list = function(req, res, next) {
 
 //Display gezochte liedje
 exports.liedje_zoek = function(req,res){
-    
     var urlParams = new URLSearchParams(req.url);
     var searchParams = new URLSearchParams(urlParams);
 
@@ -40,43 +39,49 @@ exports.liedje_zoek = function(req,res){
     for(var value of searchParams.values()) {
         console.log(value);
     Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
-        .sort([['aantStemmen', 'descending']])
+        .sort([['aantStemmen', 'descending']])  
     .exec(function(err,gezochte_liedjes){
-        console.log('in find')
         if(err){return next(err);}
-        console.log(gezochte_liedjes);
         res.send(gezochte_liedjes);
         
     });
     }
 };
-    
-    // Display detail page for a specific Liedje.
+
+// Display detail page for a specific Liedje.
 exports.liedje_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);
 };
 
-
+//stem
 exports.stem =function(req, res ,next){
     var stem= new Stem({
        titel: req.body.titel2,
        artiestNaam: req.body.artiest2,
        email:req.user.email
     });
-     stem.save(function (err) {
-        if (err) {
-            req.flash('error', 'Er was een probleem met je stem');
-            res.redirect('/liedje');
-        } 
-     });
-    req.user.aantStemmen=req.user.aantStemmen - 1;
-    req.user.save(function (err) {
-                                if (err) {
-                                    req.flash('error', 'There was a problem with saving your stem');
-                                    res.redirect('/liedje');
-                                } // saved!
-                            });
-    Liedje.findOne({ titel: req.body.titel2, artiestNaam: req.body.artiest2})
+    Stem.findOne({ titel: req.body.titel2, artiestNaam: req.body.artiest2, email:req.user.email})
+        .exec( function(err, found_liedje_user) {
+            if (err) { return next(err); }
+            if (found_liedje_user) {
+                req.flash('error', 'Je hebt al op dit liedje gestemd');
+                res.redirect('/liedje');
+            }
+            else{
+                stem.save(function (err) {
+                    if (err) {
+                        req.flash('error', 'Er was een probleem met je stem');
+                        res.redirect('/liedje');
+                    } 
+                });
+                req.user.aantStemmen=req.user.aantStemmen - 1;
+                req.user.save(function (err) {
+                    if (err) {
+                        req.flash('error', 'There was a problem with saving your stem');
+                        res.redirect('/liedje');
+                    } // saved!
+                });
+                Liedje.findOne({ titel: req.body.titel2, artiestNaam: req.body.artiest2})
                     .exec( function(err, found_liedje) {
                         if (err) { return next(err); }
                         if (found_liedje) {
@@ -104,7 +109,9 @@ exports.stem =function(req, res ,next){
                              });
                             res.redirect('/liedje/top_10')
                         }
-            });
+                });
+            }
+    });
 }
 // Handle Liedje create on POST.
 exports.liedje_create_post =function(req, res ,next){
