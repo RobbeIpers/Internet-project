@@ -75,7 +75,7 @@ app.use(expressValidator());
   }
 }));*/
 
-
+var port=process.env.PORT||8080
 require('./config/passport')(passport);
 // Passport init
 app.use(passport.initialize());
