@@ -31,6 +31,7 @@ exports.liedje_list = function(req, res, next) {
 
 //Display gezochte liedje
 exports.liedje_zoek = function(req,res){
+    
     var urlParams = new URLSearchParams(req.url);
     var searchParams = new URLSearchParams(urlParams);
 
@@ -39,8 +40,9 @@ exports.liedje_zoek = function(req,res){
         console.log(value);
     Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
     .exec(function(err,gezochte_liedjes){
+        console.log('in find')
         if(err){return next(err);}
-        console.log(gezochte_liedjes);
+        console.log(gezochte_liedjes[1].titel);
         res.send(gezochte_liedjes);
         
     });

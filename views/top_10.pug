@@ -5,7 +5,8 @@ block content
     div(class="form-group")
         label(style=bodyStyle) Liedje: 
         input#myinput(type="text", onKeyUp='showHint(this.value)', class="form-control", name="zoekLiedje", placeholder="zoek liedje")
-        label(style=bodystyle, id="idveld") Suggesties:
+        label(style=bodystyle) Suggesties:
+    table(class="w3-table-all w3-hoverable", id="idveld")
         
         
         
