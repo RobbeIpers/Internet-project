@@ -62,8 +62,8 @@ exports.stem =function(req, res ,next){
     });
     if(req.user.aantStemmen===0){
         //res.render('account');
-        req.flash('error',"Je hebt al je stemmen opgebruikt" );
-        res.redirect('/liedje')
+        req.flash('error',"Je hebt al je stemmen opgebruikt, liedje is niet toegevoegd" );
+        res.redirect('/users/account')
     }
     else{
         Stem.findOne({ titel: req.body.titel2, artiestNaam: req.body.artiest2, email:req.user.email})

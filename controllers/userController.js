@@ -105,13 +105,28 @@ exports.user_create_post=[
 ];
 
 module.exports.stem_list = function(req, res, next) {
+    var flashMessages = res.locals.getMessages();
+    console.log('flash', flashMessages);
   Stem.find({email: req.user.email})
     .exec(function (err, list_stemmen) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('account', { title: req.user.naam, stemmen: list_stemmen});
+      if(flashMessages.error){
+        res.render('account',  {
+            title: req.user.naam, 
+            stemmen: list_stemmen,
+            showErrors: true,
+            errors: flashMessages.error
+        });
+      }
+        else{
+        res.render('account', {
+            title: req.user.naam, 
+            stemmen: list_stemmen});
+        }
+    
+    
     });
-
 };
 
 
