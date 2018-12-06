@@ -39,17 +39,15 @@ exports.liedje_zoek = function(req,res){
         console.log(value);
     Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
     .exec(function(err,gezochte_liedjes){
-        console.log('test ajax1');
         if(err){return next(err);}
-        console.log('error ajax1');
         console.log(gezochte_liedjes);
         res.send(gezochte_liedjes);
         
     });
     }
 };
-
-// Display detail page for a specific Liedje.
+    
+    // Display detail page for a specific Liedje.
 exports.liedje_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);
 };
