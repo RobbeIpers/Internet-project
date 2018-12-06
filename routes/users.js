@@ -27,7 +27,7 @@ router.get('/login', function(req, res, next) {
         }
 
 });
-
+router.post('/account',user_controller.liedje_delete_post);
 //login process
 router.post('/login', function(req, res, next){
     passport.authenticate('local',{

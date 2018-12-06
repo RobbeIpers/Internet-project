@@ -2,10 +2,50 @@ var express=require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Stem = require('../models/stem');
+var Liedje = require('../models/liedje');
+
 var async =require('async');
 var bcrypt= require('bcryptjs');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+
+exports.liedje_delete_post = function(req, res) {
+    console.log("in delete");
+    Stem.findByIdAndRemove(req.body.stemid, function deleteStem(err) {
+        if (err) { 
+            return next(err); }
+        });   
+    console.log("succes");// Success 
+    Liedje.findOne({ titel: req.body.titel})
+        .exec(function(err, found_liedje) {
+            if (err) {
+                return next(err);
+            }
+        
+        if (found_liedje) {
+            found_liedje.aantStemmen = found_liedje.aantStemmen - 1;
+            found_liedje.save(function (err) {
+                if (err) {
+                    req.flash('error', 'There was a problem with saving you song');
+                    res.redirect('/users/account');
+                }
+                console.log("succes");
+            });
+        }
+    req.user.aantStemmen=req.user.aantStemmen + 1;
+    req.user.save(function (err) {
+                                if (err) {
+                                    req.flash('error', 'There was a problem with deleting your stem');
+                                    res.redirect('/account');
+                                } // saved!
+                            });
+         
+         // saved!
+    res.redirect('/users/account');
+    });            
+    return;
+};
+    
 
 // Register User
 exports.user_create_post=[

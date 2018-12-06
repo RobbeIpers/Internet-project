@@ -3,12 +3,12 @@ block content
     h1 LIEDJESSTEMPLAATS
     form(method='post', action='')
         div.form-group
-            .label(style=bodyStyle, for='titel') Titel: 
-                input#titel.form-control(name = "titel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
-            .label(for="artiestNaam") Artiest: 
-                input#artiestNaam.form-controle(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam)) 
-                div(text-allign='center')
-                    button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="zoek") zoek
+            label(for='titel') Titel: 
+            input#titel.form-control(name = "titel", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
+            label(for="artiestNaam") Artiest: 
+            input#artiestNaam.form-control(name="artiestNaam", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam)) 
+            div(text-allign='center')
+                button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="zoek") zoek
       
         if(showErrors==true)
             ul(class="errors")
@@ -27,10 +27,9 @@ block content
                         if(img)        
                             -var url=img[temp++]
                             img(src=url)
-                            
                         |#{val.name} 
-                        input#titel2.form-control(name = "titel2", type="text", placeholder="vb Baby" value=val.name, hidden=true)
+                        input#titel2.form-control(type='hidden',name = "titel2",placeholder="vb Baby" value=val.name)
                         |van 
                         | #{val.artist}
-                        input#artiest2.form-control(name = "artiest2", type="text", placeholder="vb Baby" value=val.artist,hidden=true)
+                        input#artiest2.form-control(type='hidden',name = "artiest2",placeholder="vb Baby" value=val.artist)
                         button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="stem") stem
