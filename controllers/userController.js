@@ -26,7 +26,7 @@ exports.liedje_delete_post = function(req, res) {
             found_liedje.aantStemmen = found_liedje.aantStemmen - 1;
             found_liedje.save(function (err) {
                 if (err) {
-                    req.flash('error', 'There was a problem with saving you song');
+                    req.flash('error', 'Er was een probleem met je liedje te verwijderen, probeer opnieuw');
                     res.redirect('/users/account');
                 }
                 console.log("succes");
@@ -35,7 +35,7 @@ exports.liedje_delete_post = function(req, res) {
     req.user.aantStemmen=req.user.aantStemmen + 1;
     req.user.save(function (err) {
                                 if (err) {
-                                    req.flash('error', 'There was a problem with deleting your stem');
+                                    req.flash('error', 'Er was een probleem met je liedje te verwijderen, probeer opnieuw');
                                     res.redirect('/account');
                                 } // saved!
                             });
@@ -76,7 +76,7 @@ exports.user_create_post=[
                     bcrypt.genSalt(10, function(err, salt){
                         bcrypt.hash(newUser.password, salt, function(err, hash){
                             if(err){
-                                req.flash('error', 'There was a problem with your registration');
+                                req.flash('error', 'Er was een probleem bij het registreren, probeer opnieuw');
                                 res.render('register',{title: 'Registreer', //errors: errors.array()
                                 });
                             }
@@ -87,7 +87,7 @@ exports.user_create_post=[
                                         req.flash('error', 'Email is al in gebruik');
                                     }
                                     else {
-                                        req.flash('error', 'There was a problem with your registration.');
+                                        req.flash('error', 'Er was een probleem bij het registreren, probeer opnieuw');
                                     }
                                     res.redirect('/users/register');
                                     console.log('There was an error saving the user.', err);
