@@ -5,10 +5,12 @@ block content
   div
     | welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} 
     | Op deze liedjes heb ik gestemd:
-    if(user.aantStemmen>1)
+    if(user.aantStemmen!=1)
       |stemmen
     else 
       |stem
+    div
+        a(href="/liedje") Stem hier   
     each stem in stemmen
         form(method='POST', action='')
             div.form-group
@@ -31,7 +33,7 @@ block content
       js.src = 'https://connect.facebook.net/nl_BE/sdk.js#xfbml=1&version=v3.2&appId=502849933557463&autoLogAppEvents=1';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    .fb-share-button(data-href='http://localhost:3000/users/account', data-mobile-iframe='true', data-size='small', data-layout='button')
+    .fb-share-button(data-href='https://back2theludieke90s.herokuapp.com/users/account', data-mobile-iframe='true', data-size='small', data-layout='button')
       a.fb-xfbml-parse-ignore(href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fusers%2Faccount%2F&src=sdkpreparse', target='_blank') Delen
   
       
