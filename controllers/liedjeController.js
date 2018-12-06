@@ -31,15 +31,22 @@ exports.liedje_list = function(req, res, next) {
 
 //Display gezochte liedje
 exports.liedje_zoek = function(req,res){
-    console.log('ajax  req  '+req.params.id);
-    Liedje.find({'titel': /^Le/}).select('-_id titel')
-    //select('-_id titel artiestNaam aantStemmen')
+    var urlParams = new URLSearchParams(req.url);
+    var searchParams = new URLSearchParams(urlParams);
+
+    // Display the values
+    for(var value of searchParams.values()) {
+        console.log(value);
+    Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
     .exec(function(err,gezochte_liedjes){
+        console.log('test ajax1');
         if(err){return next(err);}
+        console.log('error ajax1');
         console.log(gezochte_liedjes);
         res.send(gezochte_liedjes);
         
     });
+    }
 };
 
 // Display detail page for a specific Liedje.
