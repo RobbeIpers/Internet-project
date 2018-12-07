@@ -10,7 +10,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homepageRouter = require('./routes/homepage');
-var liedjeRouter = require('./routes/test');
+var liedjeRouter = require('./routes/liedje');
 
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -47,45 +47,25 @@ app.use(session({
 })); 
 
 app.use(flash());
-//app.use(expressValidator());
-
-//express messages
-/*app.use(require('connect-flash')());
-app.use(function(req,res,next){
-    res.locals.messsages=require('express-messages')(req,res);
-    next();
-});*/
 
 //Express Validator
 app.use(expressValidator());
-/*app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
-
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));*/
 
 var port=process.env.PORT||8080;
-require('./config/passport')(passport);
+
+
 // Passport init
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
 // Global Vars
 app.get('*',function(req, res, next){
     res.locals.user=req.user||null;
     next();
 });
 
+//routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/homepage', homepageRouter);
@@ -105,7 +85,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(port,function(){console.log(port);})
+
+app.listen(port,function(){});
 module.exports = app;
 
 

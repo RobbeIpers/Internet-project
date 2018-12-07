@@ -152,8 +152,7 @@ exports.liedje_create_post =function(req, res ,next){
                      format: 'json',
                     },
                   headers: 
-                   { 'Postman-Token': '1a37e0a4-b888-4155-a517-058c5ca5724a',
-                     'cache-control': 'no-cache' } 
+                   {                      'cache-control': 'no-cache' } 
                     };
 
                 request(options, function (error, response, body) {
