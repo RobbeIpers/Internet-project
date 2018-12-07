@@ -2,32 +2,35 @@ extends layout
 
 block content
   h1(style=headStyle)= title
-  div
-    | welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} 
+  h3(id='normal')
+    | Welkom tot je nieuwe account #{user.name} je hebt nog #{user.aantStemmen} 
     if(user.aantStemmen===1) 
         |stem
     else
         |stemmen
-    div
-        if(user.aantStemmen<3)
-            div Op deze liedjes heb ik gestemd:
+  div(style='margin-left:10%')
+    if(user.aantStemmen<3)
+        div Op deze liedjes heb ik gestemd:
 
 
-        each stem in stemmen
-            form(method='POST', action='')
-                div.form-group
-                    li #{stem.titel} van #{stem.artiestNaam}
-                        input#stemid.form-control(type='hidden',name='stemid', required='true', value=stem._id)
-                        input#stemid.form-control(type='hidden',name='titel', required='true', value=stem.titel)
-                        button.btn.btn-primary(style="margin-left:20px",class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center")
-                            i(class="fa fa-trash")
-    div
-        a(href="/liedje") Stem hier  
+    each stem in stemmen
+        form(method='POST', action='')
+            div.form-group
+                li #{stem.titel} van #{stem.artiestNaam}
+                    input#stemid.form-control(type='hidden',name='stemid', required='true', value=stem._id)
+                    input#stemid.form-control(type='hidden',name='titel', required='true', value=stem.titel)
+                    button.btn.btn-primary(style="margin-left:20px",class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center")
+                        i(class="fa fa-trash")
+    div(style="margin-left:30%")
+        a(href="/liedje")
+                img(src="../images/GoVote.png",alt="stem hier",width="40%",height="auto" )
+
     if(showErrors==true)
         ul(class="errors")
             for val in errors
                     li!= val  
-    
+  div(id='normal',style="text-align:right")
+    | Hey jij daar! Moedig je vrienden aan om ook op jouw favoriete liedjes te stemmen:
     #fb-root
     script.
       (function(d, s, id) {
@@ -37,7 +40,7 @@ block content
       js.src = 'https://connect.facebook.net/nl_BE/sdk.js#xfbml=1&version=v3.2&appId=502849933557463&autoLogAppEvents=1';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    .fb-share-button(data-href='https://back2theludieke90s.herokuapp.com/users/account', data-mobile-iframe='true', data-size='small', data-layout='button')
+    .fb-share-button(data-href='https://back2theludieke90s.herokuapp.com/users/account', data-mobile-iframe='true', data-size='large', data-layout='button')
       a.fb-xfbml-parse-ignore(href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fusers%2Faccount%2F&src=sdkpreparse', target='_blank') Delen
   
       

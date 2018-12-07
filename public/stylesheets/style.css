@@ -19,12 +19,17 @@ h1{
 searchResultaat{
     padding: 50px;
 }
-.normal{
+#normal{
+    text-align:center;
     padding:30px;
+    margin-left:30px;
 }
 h2{
     margin-top: 0px;
     padding-top: 10px;
     font-family: 'Kumar One Outline', cursive;
 
+}
+body{
+    background-color: :#f4f4f4;
 }
