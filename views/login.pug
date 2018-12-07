@@ -1,23 +1,20 @@
-extends layout
+extends layout2
 block content
-    h1 Account Login
     form(method="POST" action="/users/login")
-        div(class="w3-row")
-            div(class="w3-third w3-container")
-            div(class="w3-third w3-container")
-                    div(class="w3-card w3-round w3-white")
-                        div(class="w3-container w3-padding")
-                            if(showErrors==true)
-                                ul(class="errors")
-                                    for val in errors
-                                        li!= val
-                        div(class="w3-container w3-padding")
-                            label(style=bodyStyle) Email: 
-                            input(type="text" class="form-control" name="username" placeholder="email")
-                        div(class="w3-container w3-padding")
-                            label(style=bodyStyle) Password: 
-                            input(type="password" class="form-control" name="password" placeholder="Password")
-                        div(class="w3-container w3-padding")
-                            button(type="submit" class='w3-button w3-white w3-border w3-border-red w3-round') Submit
+        h1 Account Login
+        div(class="w3-card w3-round middle", id="wit")
+            div(class="w3-container w3-padding")
+                if(showErrors==true)
+                    ul(class="errors")
+                        for val in errors
+                            li!= val
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Email: 
+                input(type="text" class="form-control" name="username" placeholder="email")
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Password: 
+                input(type="password" class="form-control" name="password" placeholder="Password")
+            div(class="w3-container w3-padding")
+                button(type="submit" class='w3-button w3-border w3-white w3-border-red w3-round') Submit
       
-        
+    

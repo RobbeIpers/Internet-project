@@ -1,25 +1,25 @@
-extends layout
+extends layout2
 block content
-    h1 Registreren
-    div(class="normal")
-        form(method="post" action="/users/register")
-            div(class="form-group")
-                label Name: 
+    form(method="post" action="/users/register")
+        h1 Registreren
+        div(class="w3-card w3-round middle", id="wit")
+            div(class="w3-container w3-padding")
+                if(showErrors==true)
+                    ul(class="errors")
+                        for val in errors
+                            li!= val
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Name: 
                 input.form-control(type="text" class="form-control" placeholder="Name" name="name")
-            div(class="form-group")
-                label Email: 
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Email: 
                 input(type="email" class="form-control" placeholder="Email" name="email")
-            div(class="form-group")
-                label Password: 
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Password: 
                 input(type="password" class="form-control" placeholder="Password" name="password")
-            div(class="form-group")
-                label Confirm Password: 
+            div(class="w3-container w3-padding")
+                label(style=bodyStyle) Confirm Password: 
                 input(type="password" class="form-control" placeholder="Password" name="password2")
-            div(class="form-group")
+            div(class="w3-container w3-padding")
                 button(type="submit",class='w3-button w3-white w3-border w3-border-red w3-round') Submit
-
-    if(showErrors==true)
-        ul(class="errors")
-            for val in errors
-                    li!= val
 

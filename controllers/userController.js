@@ -102,7 +102,7 @@ exports.user_create_post=[
 ];
 
 module.exports.stem_list = function(req, res, next) {
-    
+    var flashMessages=res.locals.getMessages();
     Stem.find({email: req.user.email})
     .exec(function (err, list_stemmen) {
       if (err) { return next(err); }
