@@ -15,7 +15,6 @@ router.get('/account', user_controller.stem_list);
 //login form
 router.get('/login', function(req, res, next) {
     var flashMessages = res.locals.getMessages();
-    console.log('flash', flashMessages);
         if(flashMessages.error){
             res.render('login', {
                 showErrors: true,
@@ -39,9 +38,7 @@ router.post('/login', function(req, res, next){
 
 //register form  
 router.get('/register', function(req, res, next) {
-    var flashMessages = res.locals.getMessages();
-    console.log('flash', flashMessages);
-    
+    var flashMessages = res.locals.getMessages();    
     if(flashMessages.error){
         res.render('register', {
             showErrors: true,

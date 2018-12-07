@@ -9,9 +9,7 @@ router.get('/zoek', liedje_controller.liedje_zoek);
 
 //GET request 
 router.get('/',user_controller.isAuthenticated, function(req, res, next) {
-    var flashMessages = res.locals.getMessages();
-    console.log('flash', flashMessages);
-    
+    var flashMessages = res.locals.getMessages();    
     if(flashMessages.error){
         res.render('liedje_form', {
             showErrors: true,

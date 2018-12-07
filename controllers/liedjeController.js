@@ -37,14 +37,13 @@ exports.liedje_zoek = function(req,res){
 
     // Display the values
     for(var value of searchParams.values()) {
-        console.log(value);
-    Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
+        Liedje.find({'titel': {'$regex': value, '$options': 'i'}}).select('-_id titel artiestNaam aantStemmen')
         .sort([['aantStemmen', 'descending']])  
-    .exec(function(err,gezochte_liedjes){
-        if(err){return next(err);}
-        res.send(gezochte_liedjes);
-        
-    });
+        .exec(function(err,gezochte_liedjes){
+            if(err){return next(err);}
+            res.send(gezochte_liedjes);
+
+        });
     }
 };
 
@@ -163,28 +162,9 @@ exports.liedje_create_post =function(req, res ,next){
                     if(myobj.results.trackmatches.track.length===0){var niets=0;}else niets=1;
                     for (i=0;i< myobj.results.trackmatches.track.length;i++){
                         imgArr[i]=myobj.results.trackmatches.track[i].image[1]['#text'];
-                        console.log(imgArr[i]);
-                        
                     }
                     res.render('liedje_form',{tracks:myobj,img:imgArr,niets:niets});
                     });
                 }
             })
-};
-
-exports.liedje_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Liedje delete GET');
-};
-
-// Handle Liedje delete on POST.
-
-
-// Display Liedje update form on GET.
-exports.liedje_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Liedje update GET');
-};
-
-// Handle Liedje update on POST.
-exports.liedje_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Liedje update POST');
 };

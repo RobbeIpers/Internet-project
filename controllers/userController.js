@@ -10,12 +10,11 @@ const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
 exports.liedje_delete_post = function(req, res) {
-    console.log("in delete");
     Stem.findByIdAndRemove(req.body.stemid, function deleteStem(err) {
         if (err) { 
             return next(err); }
         });   
-    console.log("succes");// Success 
+// Success 
     Liedje.findOne({ titel: req.body.titel})
         .exec(function(err, found_liedje) {
             if (err) {
@@ -29,7 +28,6 @@ exports.liedje_delete_post = function(req, res) {
                     req.flash('error', 'Er was een probleem met je liedje te verwijderen, probeer opnieuw');
                     res.redirect('/users/account');
                 }
-                console.log("succes");
             });
         }
     req.user.aantStemmen=req.user.aantStemmen + 1;
@@ -89,8 +87,7 @@ exports.user_create_post=[
                                     else {
                                         req.flash('error', 'Er was een probleem bij het registreren, probeer opnieuw');
                                     }
-                                    res.redirect('/users/register');
-                                    console.log('There was an error saving the user.', err);
+                                    res.redirect('/users/register');                               
                                 }
                                 else{
                                     res.redirect('/users/login')
@@ -105,9 +102,8 @@ exports.user_create_post=[
 ];
 
 module.exports.stem_list = function(req, res, next) {
-    var flashMessages = res.locals.getMessages();
-    console.log('flash', flashMessages);
-  Stem.find({email: req.user.email})
+    
+    Stem.find({email: req.user.email})
     .exec(function (err, list_stemmen) {
       if (err) { return next(err); }
       //Successful, so render
@@ -141,10 +137,15 @@ module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }
 exports.isAuthenticated = function (req, res, next) {
+        var flashMessages = res.locals.getMessages();
+
     if (req.isAuthenticated()) {
         return next();
     }
-    else res.redirect('/users/login');
+    else {
+        req.flash('error','Je moet je aanmelden om te kunnen stemmen');
+        res.redirect('/users/login');
+         }
 }
 
 
