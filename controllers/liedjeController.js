@@ -24,7 +24,9 @@ exports.liedje_list = function(req, res, next) {
             top10[i]=list_liedjes[i];
         }
     }
-      else{top10=list_liedjes;}
+      else{
+          top10=list_liedjes;
+      }
       res.render('top_10', { title: 'top 10', liedje_list: top10});
     });
 
@@ -47,11 +49,6 @@ exports.liedje_zoek = function(req,res){
     }
 };
 
-// Display detail page for a specific Liedje.
-exports.liedje_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Liedje detail: ' + req.params.id);
-};
-
 //stem
 exports.stem =function(req, res ,next){
     var stem= new Stem({
@@ -61,7 +58,7 @@ exports.stem =function(req, res ,next){
     });
     if(req.user.aantStemmen===0){
         //res.render('account');
-        req.flash('error',"Je hebt al je stemmen opgebruikt, liedje is niet toegevoegd" );
+        req.flash('error',"Je hebt al je stemmen opgebruikt, liedje is niet toegevoegd");
         res.redirect('/users/account')
     }
     else{
@@ -125,8 +122,7 @@ exports.liedje_create_post =function(req, res ,next){
     //sanitize
         sanitizeBody('titel').trim().escape(),
         sanitizeBody('artiestNaam').trim().escape(),
-        req.checkBody('titel', 'Vul titel in').isLength({ min: 1 }).trim();
-       // req.checkBody('artiestNaam', 'Artiesten naam required').isLength({ min: 1 }).trim();
+        req.checkBody('titel', 'Vul een titel in').isLength({ min: 1 }).trim();
         
     //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
  
@@ -136,7 +132,7 @@ exports.liedje_create_post =function(req, res ,next){
                 result.array().forEach((error) => {
                     req.flash('error', error.msg);
                 })
-             res.redirect('/liedje');}
+            res.redirect('/liedje');}
             else{      
                 var request = require("request");
                 var options = { method: 'GET', 
@@ -151,7 +147,8 @@ exports.liedje_create_post =function(req, res ,next){
                      format: 'json',
                     },
                   headers: 
-                   {                      'cache-control': 'no-cache' } 
+                   { 
+                       'cache-control': 'no-cache' } 
                     };
 
                 request(options, function (error, response, body) {

@@ -102,10 +102,13 @@ exports.user_create_post=[
 ];
 
 module.exports.stem_list = function(req, res, next) {
-    var flashMessages=res.locals.getMessages();
+    
+    //var flashMessages=res.locals.getMessages();
     Stem.find({email: req.user.email})
     .exec(function (err, list_stemmen) {
       if (err) { return next(err); }
+ var flashMessages = res.locals.getMessages();
+
       //Successful, so render
       if(flashMessages.error){
         res.render('account',  {
@@ -137,8 +140,6 @@ module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }
 exports.isAuthenticated = function (req, res, next) {
-        var flashMessages = res.locals.getMessages();
-
     if (req.isAuthenticated()) {
         return next();
     }

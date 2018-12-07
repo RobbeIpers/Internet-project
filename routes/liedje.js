@@ -26,7 +26,6 @@ router.get('/',user_controller.isAuthenticated, function(req, res, next) {
 router.post('/', liedje_controller.liedje_create_post);
 router.get('/stem',function(req,res,next){
     res.render('homepage');
-    console.log(req.body.titel);
 });
 
 router.post('/stem',liedje_controller.stem);
