@@ -23,8 +23,20 @@ h1{
 searchResultaat{
     padding: 50px;
 }
-#normal{
-    text-align:center;
+#iframe{
+    position: absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    height:100%;
+    width:100%
+}
+#iframewrapper{
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:25px;
+    height:0px
 }
 h2{
     padding-top: 5%;
