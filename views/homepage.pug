@@ -1,16 +1,24 @@
 extends layout
-
 block content
-    h2(style="text-align:center") Chiro ludiek presenteert:
-    img(src="images/logo.jpg",alt="logo 90s fuif", width="  100%",height= "auto")
-    div(style="text-align:center;background-image:linear-gradient(#67ccff,#00ff00)")
-        h2 MAAR WAAR??
-        iframe(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.666728337449!2d3.5714088160262363!3d51.059241279564006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c36e93830bfdf5%3A0x682b08f9a1c774d3!2sGemeentelijke+sporthal+Landegem!5e0!3m2!1snl!2sbe!4v1543676607505" width="600" height="450" frameborder="0" style="border:0" allowfullscreen) 
-        h2 MAAR WAT??
-        b Een kweetnieoewijs feest met niet alleen <em> ALLE </em> nineties toppers maar ook muziek gekozen door jou!!
-        div
-            a(style="font-size:20px;color:white ",href="/liedje") Stem Hier
-        iframe(width="560" height="315" src="https://www.youtube.com/embed/-BVXJja8ggM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+    div(style="text-align:center")
+        h1 Chiro ludiek presenteert:
+        div(class="w3-card w3-round middle padding3 purple")
+            div(class="w3-container w3-padding")
+                img(src="images/logo.jpg",alt="logo 90s fuif", width="50%",height= "auto")
+            div(class="w3-container w3-padding textw", id='titeltje')
+                |Chirofuif XL – BACK TO THE NINETIES
+            div(class="w3-container w3-padding textw")
+                |Landegem finest neemt jullie dit jaar terug mee naar de nineties! Welke beats en nineties songs er gedraaid worden, kunnen jullie zelf beslissen door jullie top 3 door te sturen! De rest van de avond wordt gevuld met de muziek van Youri cherrymoon en Neon! 
+                |Zet <b>27 april</b> maar alvast in jullie agenda!
 
-    
+            
+    div(style="text-align:center")
+        h2 Maar waar??
+        iframe(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.666728337449!2d3.5714088160262363!3d51.059241279564006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c36e93830bfdf5%3A0x682b08f9a1c774d3!2sGemeentelijke+sporthal+Landegem!5e0!3m2!1snl!2sbe!4v1543676607505" width="600" height="450" frameborder="0" style="border:0" allowfullscreen) 
+        h2 Maar wat??
+        b(class="textw") Een kweetnieoewijs feest met niet alleen <em> ALLE </em> nineties toppers maar ook muziek gekozen door jou!!
+        div
+            a(style="font-size:20px;color:white;font-weight:bold ",href="/liedje") Stem Hier
+        iframe(width="560" height="315" src="https://www.youtube.com/embed/-BVXJja8ggM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+        
     

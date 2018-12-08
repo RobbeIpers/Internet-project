@@ -12,8 +12,8 @@ html
     link(href="https://fonts.googleapis.com/css?family=Kumar+One+Outline" rel="stylesheet")
 
 
-  body
-    div(class="w3-bar w3-red")
+  body(class="bgimg2")
+    div(class="w3-bar w3-white w3-opacity-min")
         img(src= "../images/download.png",class="w3-round",height="50px")
         a(href="/",class="w3-bar-item w3-button w3-mobile") Homepage
         a(href="/liedje",class="w3-bar-item w3-button w3-mobile") Liedje       
@@ -22,12 +22,12 @@ html
             a(href="/users/account",class="w3-bar-item w3-button w3-mobile") #{user.name}
             a(href="/users/logout",class="w3-bar-item w3-button w3-mobile") logout
         else
-            a(href="/users/login",class="w3-bar-item w3-button w3-mobile") log in
+            a(href="/users/login",class="w3-bar-item w3-button w3-mobile ") log in
             a(href="/users/register",class="w3-bar-item w3-button w3-mobile") registreer
             
         
   .container
   -const bodyStyle ={"color": "red","text-align":"center"}
   block content
-  footer(bottom="5%",position="fixed", class="w3-center") 2018 Copyright:
+  footer(float="bottom", class="w3-center") 2018 Copyright:
      a(href="https://chiroludiek.be/") © Chiro ludiek
