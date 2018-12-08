@@ -55,3 +55,14 @@ h2{
 #titeltje{
     font-weight: bold;
 }
+.tabel{
+    width: 70%;
+    margin-left:15%;
+    margin-right:15%;
+    margin-bottom: 1%
+}
+.label{
+    color: #f4f4f4;
+    font-weight: bold;
+    font-size: 100%
+}

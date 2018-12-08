@@ -1,25 +1,23 @@
-extends layout
+extends layout2
 block content
     -var row =1;
     h1=title
-    div(class="form-group")
-        label(style=bodyStyle) Liedje: 
-        input#myinput(type="text", onKeyUp='showHint(this.value)', class="form-control", name="zoekLiedje", placeholder="zoek liedje")
-        label(style=bodystyle) Suggesties:
-    table(class="w3-table-all w3-hoverable", id="idveld")
-        
-        
-        
-    table(class="w3-table-all w3-hoverable")
-        tr(class="w3-red")
-            th
-            th Titel
-            th Artiest
-            th Stemmen
-            each liedje in liedje_list
-                tr
-                    td #{row++} 
-                    td #{liedje.titel}
-                    td #{liedje.artiestNaam}
-                    td #{liedje.aantStemmen}
+    div(class="bigmiddle w3-card w3-round")
+        table(class="tabel w3-striped w3-white")
+            tr(class="w3-red")
+                th
+                th Titel
+                th Artiest
+                th Stemmen
+                each liedje in liedje_list
+                    tr
+                        td #{row++} 
+                        td #{liedje.titel}
+                        td #{liedje.artiestNaam}
+                        td #{liedje.aantStemmen}
+    form(class='form-inline')
+        div(class="middle")
+            label(class="label") Liedje:
+            input(type="text", onKeyUp='showHint(this.value)', class="w3-rest form-control", name="zoekLiedje", placeholder="zoek liedje")
+    table(class="tabel w3-striped w3-white", id="idveld")
     script(src="/ajax.js")
