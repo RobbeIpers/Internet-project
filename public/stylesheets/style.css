@@ -23,8 +23,6 @@ searchResultaat{
 }
 #normal{
     text-align:center;
-    padding:30px;
-    margin-left:30px;
 }
 h2{
     margin-top: 0px;
@@ -41,10 +39,34 @@ h2{
 .middle{
     margin-left: 27%;
     margin-right: 27%;
-    margin-bottom: 5%
+    margin-bottom: 5%;
+}
+.middle2{
+    margin-left: 10%;
+    margin-right:10%;
+    margin-bottom:5%;
+}
+.middle3{
+    margin-left: 30%;
+    
+}
+#top{
+    margin-top:5%
+}
+.padding{
+    padding-bottom: 2%;
+}
+.padding2{
+    padding-top: 2%;
+}
+#op{
+    opacity: 0.75;
 }
 #wit{
     background-color: #f4f4f4
+}
+.purple{
+    background-color: #D8BFD8
 }
 #right{
     margin-right: 2%
@@ -65,4 +87,11 @@ h2{
     color: #f4f4f4;
     font-weight: bold;
     font-size: 100%
+}
+#rightfloat{
+    width: 15%;
+}
+#leftfloat{
+    float:left;
+    margin-right: 2%
 }
