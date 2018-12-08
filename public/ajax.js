@@ -9,7 +9,7 @@ function showHint(str){
             if (this.readyState == 4 && this.status == 200){ 
                 var table="<tr class='w3-red'><th>Titel</th><th>Artiest</th><th>Stemmen</th></tr>";
                 if(JSON.parse(this.responseText).length == 0){
-                    document.getElementById("idveld").innerHTML= "";    
+                    document.getElementById("idveld").innerHTML= "Je liedje heeft nog geen stemmen. Misschien een typefout? Of gewoon slechte smaak...";    
                 }
                 else{
                     for(i=0;i<JSON.parse(this.responseText).length;i++){
