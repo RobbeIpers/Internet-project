@@ -123,9 +123,7 @@ exports.liedje_create_post =function(req, res ,next){
         sanitizeBody('titel').trim().escape(),
         sanitizeBody('artiestNaam').trim().escape(),
         req.checkBody('titel', 'Vul een titel in').isLength({ min: 1 }).trim();
-        
-    //Kijken of liedje al in database zit zoja, aantal stemmen verhogen, anders, toevoegen aan database
- 
+         
     req.getValidationResult()
         .then(function(result) {
             if (result.isEmpty() === false) {
@@ -148,7 +146,7 @@ exports.liedje_create_post =function(req, res ,next){
                     },
                   headers: 
                    { 
-                       'cache-control': 'no-cache' } 
+                       'cache-control': 'cache' } 
                     };
 
                 request(options, function (error, response, body) {
@@ -156,11 +154,14 @@ exports.liedje_create_post =function(req, res ,next){
                     var myobj=JSON.parse(myJSON);
                     var imgArr= ["","","","",""];
                     var i=0;
-                    if(myobj.results.trackmatches.track.length===0){var niets=0;}else niets=1;
+                    if(myobj.results.trackmatches.track.length===0){
+                        var niets=0;
+                    }
+                    else niets=1;
                     for (i=0;i< myobj.results.trackmatches.track.length;i++){
                         imgArr[i]=myobj.results.trackmatches.track[i].image[1]['#text'];
                     }
-                    res.render('liedje_form',{tracks:myobj,img:imgArr,niets:niets});
+                    res.render('liedje_form',{tracks:myobj,img:imgArr,niets:niets,user:req.user});
                     });
                 }
             })
