@@ -27,7 +27,7 @@ exports.liedje_list = function(req, res, next) {
       else{
           top10=list_liedjes;
       }
-      res.render('top_10', { title: 'top 10', liedje_list: top10});
+      res.render('top_10', { title: 'Top 10', liedje_list: top10});
     });
 
 };
