@@ -5,6 +5,9 @@ h1{
     color: white;
     text-align:center;
     font-weight: bold;
+    font-family: 'Monoton', cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 .errors {
     background-color: rgba(255,0,0,0.2);
@@ -23,6 +26,17 @@ h1{
 searchResultaat{
     padding: 50px;
 }
+#linkbutton {
+     background:none!important;
+     color:inherit;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+    margin-left: 5%;
+     /*border is optional*/
+     border-bottom:1px solid #444; 
+     cursor: pointer;
+}
 #iframe{
     position: absolute;
     left:0px;
@@ -38,6 +52,18 @@ searchResultaat{
     padding-top:25px;
     height:0px
 }
+#zoekImg{
+    display: inline;
+}
+@media only screen and (max-width: 600px) {
+  #zoekImg {
+     text-align: center;
+    display:block;
+
+  }
+}
+    
+
 h2{
     padding-top: 5%;
     margin-top: 10%;
@@ -45,6 +71,10 @@ h2{
     color:#F4F4F4;
     text-align:center;
     font-weight: bold;
+    font-family: 'Monoton', cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+
 }
 .bgimg {
     background-image: url("../images/fuif.jpg");
@@ -87,6 +117,16 @@ h2{
 }
 #op{
     opacity: 0.75;
+}
+
+@media screen and (max-width: 600px){
+    #witForm{
+        width:100%;
+        margin-left: 0;
+    }
+}
+#witForm{
+    background-color: #f4f4f4      
 }
 #wit{
     background-color: #f4f4f4

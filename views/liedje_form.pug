@@ -16,25 +16,24 @@ block content
                 input(name="artiestNaam",id="artiestNaam",class="form-control", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam)) 
             div(class="w3-container w3-padding")
                 button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="zoek") zoek
-      
-        
-    div(class="w3-card w3-round middle searchResultaat", id="wit")         
-        if(niets===0)
-            | geen resultaten
-        else if(tracks)
-            -var temp=0;
-            div(class="w3-container w3-padding", id='titeltje')
-                |Bedoelde je één van deze liedjes?
-            div(class="w3-container w3-padding")
-                each val in tracks.results.trackmatches.track
-                    form(method='POST', action='liedje/stem')
-                        div(class="w3-container w3-padding") 
-                            if(img)        
-                                -var url=img[temp++]
-                                img(src=url, id="right")
-                            |#{val.name} 
-                            input#titel2.form-control(type='hidden',name = "titel2",placeholder="vb Baby" value=val.name)
-                            |van 
-                            | #{val.artist} 
-                            input#artiest2.form-control(type='hidden',name = "artiest2",placeholder="vb Baby" value=val.artist)
-                            button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',id='left',type='submit',allign="center", value="stem") stem
+          
+    div(class="w3-card w3-round middle searchResultaat", id="witForm")
+        div(id="wit")
+            if(niets===0)
+                | geen resultaten
+            else if(tracks)
+                -var temp=0;
+                div(class="w3-container w3-padding", id='titeltje')
+                    |Bedoelde je één van deze liedjes?
+                div(class="w3-container w3-padding")
+                    each val in tracks.results.trackmatches.track
+                        form(method='POST', action='liedje/stem')
+                            div(class="w3-container w3-padding") 
+                                if(img)        
+                                    -var url=img[temp++]
+                                    div(id="zoekImg")
+                                        img(src=url)
+                                input#titel2.form-control(type='hidden',name = "titel2",placeholder="vb Baby" value=val.name)
+                                input#artiest2.form-control(type='hidden',name = "artiest2",placeholder="vb Baby" value=val.artist)
+                                div(id="zoekImg")
+                                    button.btn.btn-primary(id='linkbutton',type='submit',allign="center", value="stem") #{val.name} van #{val.artist} 
