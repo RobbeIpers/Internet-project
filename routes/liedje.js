@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var liedje_controller = require('../controllers/liedjeController');
 var user_controller = require('../controllers/userController');
-router.get('/top_10', liedje_controller.liedje_list);
+router.get('/top-10', liedje_controller.liedje_list);
 
 
 router.get('/zoek', liedje_controller.liedje_zoek);

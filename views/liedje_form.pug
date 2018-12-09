@@ -9,10 +9,10 @@ block content
                         for val in errors
                             li!= val
             div(class="w3-container w3-padding")
-                label(style=bodyStyle) Titel: 
+                label(style=bodyStyle, for="titel") Titel: 
                 input(name = "titel", id="titel", class="form-control", type="text", placeholder="vb Baby" value=(undefined===liedje ? '' : liedje.titel))
             div(class="w3-container w3-padding")
-                label(style=bodyStyle) Artiest:
+                label(style=bodyStyle, for="artiestNaam") Artiest:
                 input(name="artiestNaam",id="artiestNaam",class="form-control", type="text", placeholder="vb Justin Bieber"  value=(undefined===liedje ? '' : liedje.artiestNaam)) 
             div(class="w3-container w3-padding")
                 button.btn.btn-primary(class='w3-button w3-white w3-border w3-border-red w3-round',type='submit',allign="center", value="zoek") zoek
