@@ -54,7 +54,7 @@ h2{
 }
 .bgimg2 {
     background-image: url("../images/fuif.jpg");
-    background-color: linear-gradient(#180E0F, #D8BFD8);
+    background-color: #180E0F;
     height: 500px;
     background-position: center;
     background-repeat: no-repeat;
