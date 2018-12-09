@@ -54,7 +54,7 @@ h2{
 }
 .bgimg2 {
     background-image: url("../images/fuif.jpg");
-    background-color: #D8BFD8;
+    background-color: linear-gradient(#180E0F, #D8BFD8);
     height: 500px;
     background-position: center;
     background-repeat: no-repeat;
@@ -71,10 +71,7 @@ h2{
     margin-right:10%;
     margin-bottom:5%;
 }
-.middle3{
-    margin-left: 30%;
-    
-}
+
 #top{
     margin-top:5%
 }
@@ -131,13 +128,21 @@ h2{
     font-size: 100%;
     text-align: center;
 }
-#rightfloat{
-    width: 15%;
-}
-#leftfloat{
-    float:left;
-    margin-right: 2%
-}
+
 .textw{
     color: white;
+}
+.floatright{
+    float: right;
+}
+.clearfix::after{
+    content:"";
+    clear:both;
+    display: table;
+    
+}
+.centeralign{
+    align-content: center;
+    align-items: center;
+    text-align: center;
 }
