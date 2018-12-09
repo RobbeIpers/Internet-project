@@ -109,7 +109,7 @@ exports.stem =function(req, res ,next){
                                         //return handleError(err);
                                     } // saved!
                                  });
-                                res.redirect('/liedje/top_10')
+                                res.redirect('/liedje/top-10')
                             }
                     });
                 }
