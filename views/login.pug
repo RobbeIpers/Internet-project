@@ -9,10 +9,10 @@ block content
                         for val in errors
                             li!= val
             div(class="w3-container w3-padding")
-                label(style=bodyStyle) Email: 
+                label(style=bodyStyle, for="email") Email: 
                 input(type="text" class="form-control" name="username" placeholder="email")
             div(class="w3-container w3-padding")
-                label(style=bodyStyle) Password: 
+                label(style=bodyStyle, for="password") Password: 
                 input(type="password" class="form-control" name="password" placeholder="Password")
             div(class="w3-container w3-padding")
                 button(type="submit" class='w3-button w3-border w3-white w3-border-red w3-round') Submit
