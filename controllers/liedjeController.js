@@ -94,7 +94,7 @@ exports.stem =function(req, res ,next){
                                         res.redirect('/liedje');
                                     } // saved!
                                 });
-                               res.redirect('/liedje/top_10')
+                               res.redirect('/liedje/top-10')
                             }
 
                            else {
